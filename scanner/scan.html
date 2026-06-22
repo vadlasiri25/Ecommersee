@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Location Scanner</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+    <h2>QR Location Scanner</h2>
+
+    <div id="reader" style="width:300px;"></div>
+    <p id="result"></p>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+
+            document.getElementById("result").innerHTML =
+                "Scanned Data: " + decodedText;
+
+            if(decodedText.startsWith("geo:")) {
+                let coords = decodedText.replace("geo:", "");
+                window.open(
+                    "https://maps.google.com/?q=" + coords,
+                    "_blank"
+                );
+            }
+
+            else if(decodedText.includes("maps.google.com")) {
+                window.open(decodedText, "_blank");
+            }
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 10, qrbox: 250 }
+        );
+
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+
+</body>
+</html>

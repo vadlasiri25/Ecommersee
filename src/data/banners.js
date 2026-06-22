@@ -1,0 +1,38 @@
+export const heroBanners = [
+  {
+    id: 1,
+    title: 'Summer Collection',
+    subtitle: 'Up to 60% off on trending styles. Refresh your wardrobe with the hottest looks of the season.',
+    cta: 'Shop Now',
+    ctaLink: '/products?category=summer',
+    image: 'https://picsum.photos/seed/hero-summer/1200/600',
+    gradient: 'from-primary-700 via-rose-500 to-accent-500',
+  },
+  {
+    id: 2,
+    title: 'Luxury Ethnic Wear',
+    subtitle: 'Handcrafted elegance for every occasion. Discover our premium festive collection.',
+    cta: 'Explore',
+    ctaLink: '/products?category=ethnic',
+    image: 'https://picsum.photos/seed/hero-ethnic/1200/600',
+    gradient: 'from-rose-600 via-primary-600 to-primary-800',
+  },
+  {
+    id: 3,
+    title: 'New Season Drops',
+    subtitle: 'Be the first to wear what\'s next. Exclusive new arrivals just landed.',
+    cta: 'Discover',
+    ctaLink: '/products?category=new',
+    image: 'https://picsum.photos/seed/hero-newseason/1200/600',
+    gradient: 'from-accent-500 via-rose-500 to-primary-600',
+  },
+  {
+    id: 4,
+    title: 'Athleisure Edit',
+    subtitle: 'From gym to brunch — performance meets style in our newest athletic wear.',
+    cta: 'Shop Active',
+    ctaLink: '/products?category=active',
+    image: 'https://picsum.photos/seed/hero-athleisure/1200/600',
+    gradient: 'from-primary-900 via-primary-600 to-accent-400',
+  },
+];
