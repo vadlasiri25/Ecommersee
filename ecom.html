@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleBazaar — Premium Fashion Store</title>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" crossorigin href="/Ecommersee/assets/ecom-CFgjxRHh.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphism Header -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <button class="menu-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="ecom.html" class="logo font-display">StyleBazaar</a>
+      </div>
+
+      <!-- Navigation Menu for Desktop -->
+      <nav class="desktop-only">
+        <ul class="categories-menu">
+          <li><a href="#" onclick="filterCategory('all')">Home</a></li>
+          <li><a href="#" onclick="filterCategory('men')">Men</a></li>
+          <li><a href="#" onclick="filterCategory('women')">Women</a></li>
+          <li><a href="#" onclick="filterCategory('shoes')">Shoes</a></li>
+          <li><a href="#" onclick="filterCategory('accessories')">Accessories</a></li>
+          <li><a href="#" onclick="filterCategory('beauty')">Skincare</a></li>
+        </ul>
+      </nav>
+
+      <!-- Rounded Live Search Bar -->
+      <div class="nav-center">
+        <div class="search-bar">
+          <i class="search-icon" data-lucide="search"></i>
+          <input type="text" id="searchInput" placeholder="Search for brands, products, or categories..." onkeyup="handleSearch(event)">
+        </div>
+      </div>
+
+      <!-- Header Icon Actions -->
+      <div class="nav-right">
+        <button class="nav-icon-btn wishlist-toggle-btn" onclick="toggleDrawer('wishlistDrawer')" aria-label="Wishlist">
+          <i data-lucide="heart"></i>
+          <span class="badge" id="wishlistBadge">0</span>
+        </button>
+        <button class="nav-icon-btn cart-toggle-btn" onclick="toggleDrawer('cartDrawer')" aria-label="Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+        <button class="nav-icon-btn" aria-label="Profile">
+          <i data-lucide="user"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Bottom Sticky Menu -->
+  <nav class="mobile-nav">
+    <a href="ecom.html" class="mobile-nav-item active">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="filterCategory('all')">
+      <i data-lucide="grid"></i>
+      <span>Explore</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="toggleDrawer('wishlistDrawer')">
+      <i data-lucide="heart"></i>
+      <span>Wishlist</span>
+    </a>
+    <a href="#" class="mobile-nav-item" onclick="toggleDrawer('cartDrawer')">
+      <i data-lucide="shopping-bag"></i>
+      <span>Bag</span>
+    </a>
+    <a href="#" class="mobile-nav-item">
+      <i data-lucide="user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Promotional Banner Slider -->
+    <section class="hero-carousel">
+      <div class="hero-slider" id="heroSlider">
+        
+        <!-- Slide 1 -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, #4c1d95, #c084fc);">
+          <div class="slide-content">
+            <span class="slide-tag">Megadeal Sale</span>
+            <h1 class="slide-title font-display">GRAND FASHION FESTIVAL</h1>
+            <p class="slide-subtitle">Up to 80% OFF on Top International Brands</p>
+            <button class="slide-btn" onclick="filterCategory('women')">Explore Now</button>
+          </div>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop&q=80" alt="Fashion Model" class="slide-bg-img">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, #1e1b4b, #6366f1);">
+          <div class="slide-content">
+            <span class="slide-tag">Activewear & Casuals</span>
+            <h1 class="slide-title font-display">STREETWEAR INSPIRED</h1>
+            <p class="slide-subtitle">Flat 50% OFF on Hoodies, Jackets & Sneakers</p>
+            <button class="slide-btn" onclick="filterCategory('shoes')">Shop Sneakers</button>
+          </div>
+          <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80" alt="Streetwear Collection" class="slide-bg-img">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide" style="background: linear-gradient(135deg, #831843, #f472b6);">
+          <div class="slide-content">
+            <span class="slide-tag">Premium Glow</span>
+            <h1 class="slide-title font-display">LUXURY SKINCARE</h1>
+            <p class="slide-subtitle">Get 30% OFF + Extra Gift on Estée Lauder & More</p>
+            <button class="slide-btn" onclick="filterCategory('beauty')">Shop Skincare</button>
+          </div>
+          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&auto=format&fit=crop&q=80" alt="Beauty Model" class="slide-bg-img">
+        </div>
+
+      </div>
+
+      <!-- Carousel dots indicators -->
+      <div class="carousel-dots" id="carouselDots">
+        <span class="dot active" onclick="setSlide(0)"></span>
+        <span class="dot" onclick="setSlide(1)"></span>
+        <span class="dot" onclick="setSlide(2)"></span>
+      </div>
+    </section>
+
+    <!-- Coupon Code Flat discount -->
+    <div class="coupon-banner">
+      <div class="coupon-details">
+        <h3>FLAT ₹200 OFF ON FIRST ORDER</h3>
+        <p>Min Order Value ₹999. Use Code on checkout</p>
+      </div>
+      <div class="coupon-code" onclick="copyCoupon()">STYLE200</div>
+    </div>
+
+    <!-- Circular Categories Row -->
+    <section>
+      <h2 class="section-title font-display"><i data-lucide="grid-3x3"></i> SHOP BY CATEGORY</h2>
+      <div class="categories-container no-scrollbar">
+        
+        <div class="category-circle" onclick="filterCategory('all')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&auto=format&fit=crop&q=80" alt="All">
+          </div>
+          <span class="category-name">All</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('men')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=200&auto=format&fit=crop&q=80" alt="Men">
+          </div>
+          <span class="category-name">Men</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('women')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&auto=format&fit=crop&q=80" alt="Women">
+          </div>
+          <span class="category-name">Women</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('shoes')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&auto=format&fit=crop&q=80" alt="Shoes">
+          </div>
+          <span class="category-name">Shoes</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('accessories')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&auto=format&fit=crop&q=80" alt="Accessories">
+          </div>
+          <span class="category-name">Accessories</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('beauty')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=200&auto=format&fit=crop&q=80" alt="Skincare">
+          </div>
+          <span class="category-name">Skincare</span>
+        </div>
+
+        <div class="category-circle" onclick="filterCategory('watches')">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=200&auto=format&fit=crop&q=80" alt="Watches">
+          </div>
+          <span class="category-name">Watches</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PREMIUM SHOPPING SECTIONS -->
+
+    <!-- Brands to Explore (Skincare/Wellness Pastel gradients) -->
+    <section>
+      <h2 class="section-title font-display"><i data-lucide="sparkles"></i> BRANDS TO EXPLORE</h2>
+      <div class="brands-row no-scrollbar">
+        
+        <div class="brand-card" style="background: linear-gradient(135deg, #e0f2fe, #f3e8ff);">
+          <div class="brand-content">
+            <span class="brand-name">KAMA Ayurveda</span>
+            <span class="brand-tagline">Pure Herbs</span>
+            <span class="brand-discount">50% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=300&auto=format&fit=crop&q=80" alt="KAMA Ayurveda" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #fce7f3, #ffe4e6);">
+          <div class="brand-content">
+            <span class="brand-name">CeraVe Skincare</span>
+            <span class="brand-tagline">Ceramides Boost</span>
+            <span class="brand-discount">60% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=300&auto=format&fit=crop&q=80" alt="CeraVe" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #ede9fe, #fae8ff);">
+          <div class="brand-content">
+            <span class="brand-name">The Ordinary</span>
+            <span class="brand-tagline">Minimal Chemistry</span>
+            <span class="brand-discount">Flat 70%</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300&auto=format&fit=crop&q=80" alt="The Ordinary" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #d1fae5, #ecfdf5);">
+          <div class="brand-content">
+            <span class="brand-name">Forest Essentials</span>
+            <span class="brand-tagline">Royal Glow</span>
+            <span class="brand-discount">55% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=300&auto=format&fit=crop&q=80" alt="Forest Essentials" class="brand-card-bg">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Brands to Browse (Apparel Pastel gradients) -->
+    <section>
+      <h2 class="section-title font-display"><i data-lucide="tag"></i> BRANDS TO BROWSE</h2>
+      <div class="brands-row no-scrollbar">
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #fef3c7, #ffedd5);">
+          <div class="brand-content">
+            <span class="brand-name">Zara Luxury</span>
+            <span class="brand-tagline">Street Couture</span>
+            <span class="brand-discount">80% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=300&auto=format&fit=crop&q=80" alt="Zara" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #ede9fe, #e0f2fe);">
+          <div class="brand-content">
+            <span class="brand-name">H&M Basics</span>
+            <span class="brand-tagline">Cozy Knitwear</span>
+            <span class="brand-discount">70% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&auto=format&fit=crop&q=80" alt="H&M" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #fce7f3, #fae8ff);">
+          <div class="brand-content">
+            <span class="brand-name">Roadster Co.</span>
+            <span class="brand-tagline">Rugged Denims</span>
+            <span class="brand-discount">65% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=300&auto=format&fit=crop&q=80" alt="Roadster" class="brand-card-bg">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Brands in Spotlight (Lifestyle/Accessories Pastel gradients) -->
+    <section>
+      <h2 class="section-title font-display"><i data-lucide="award"></i> BRANDS IN SPOTLIGHT</h2>
+      <div class="brands-row no-scrollbar">
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #e0f2fe, #e2e8f0);">
+          <div class="brand-content">
+            <span class="brand-name">Fossil Leather</span>
+            <span class="brand-tagline">Luxury Horology</span>
+            <span class="brand-discount">50% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300&auto=format&fit=crop&q=80" alt="Fossil" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #fce7f3, #ffe4e6);">
+          <div class="brand-content">
+            <span class="brand-name">Lavie Luxury</span>
+            <span class="brand-tagline">Chic Handbags</span>
+            <span class="brand-discount">60% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300&auto=format&fit=crop&q=80" alt="Lavie" class="brand-card-bg">
+        </div>
+
+        <div class="brand-card" style="background: linear-gradient(135deg, #fef3c7, #ffe4e6);">
+          <div class="brand-content">
+            <span class="brand-name">Ray-Ban Optic</span>
+            <span class="brand-tagline">Iconic Aviators</span>
+            <span class="brand-discount">55% OFF</span>
+          </div>
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300&auto=format&fit=crop&q=80" alt="Ray-Ban" class="brand-card-bg">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Curated Product Showcase Section -->
+    <section>
+      <h2 class="section-title font-display"><i data-lucide="shopping-bag"></i> PREMIUM SHOWCASE</h2>
+      
+      <!-- Product Grid -->
+      <div class="product-grid" id="productGrid">
+        <!-- Rendered dynamically via JS for state management -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Brand Partner Marquee -->
+  <div class="partners-marquee">
+    <div class="marquee-track">
+      <div class="marquee-item">Nike</div>
+      <div class="marquee-item">Zara</div>
+      <div class="marquee-item">H&M</div>
+      <div class="marquee-item">Puma</div>
+      <div class="marquee-item">Roadster</div>
+      <div class="marquee-item">Fossil</div>
+      <div class="marquee-item">Lavie</div>
+      <div class="marquee-item">Biba</div>
+      <!-- Duplicate track for infinite loop -->
+      <div class="marquee-item">Nike</div>
+      <div class="marquee-item">Zara</div>
+      <div class="marquee-item">H&M</div>
+      <div class="marquee-item">Puma</div>
+      <div class="marquee-item">Roadster</div>
+      <div class="marquee-item">Fossil</div>
+      <div class="marquee-item">Lavie</div>
+      <div class="marquee-item">Biba</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <span class="logo font-display">StyleBazaar</span>
+        <p>Experience luxury shopping at your fingertips. Handpicked collections from top premium fashion, footwear, and cosmetics brands globally.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#" onclick="filterCategory('men')">Men's Apparel</a></li>
+          <li><a href="#" onclick="filterCategory('women')">Women's Closet</a></li>
+          <li><a href="#" onclick="filterCategory('shoes')">Athletic Footwear</a></li>
+          <li><a href="#" onclick="filterCategory('accessories')">Bags & Watches</a></li>
+          <li><a href="#" onclick="filterCategory('beauty')">Skincare Remedies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">FAQ & Live Chat</a></li>
+          <li><a href="#">Shipping Details</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Join the Club</h4>
+        <ul>
+          <li><a href="#">Gift Vouchers</a></li>
+          <li><a href="#">Style Insider Program</a></li>
+          <li><a href="#">Refer & Earn</a></li>
+          <li><a href="#">Bazaar Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 StyleBazaar. Engineered for premium fashion aesthetics.</p>
+      <div class="payment-methods">
+        <span class="payment-badge">UPI</span>
+        <span class="payment-badge">VISA</span>
+        <span class="payment-badge">MASTERCARD</span>
+        <span class="payment-badge">G-PAY</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDE DRAWER -->
+  <div class="drawer-backdrop" id="cartBackdrop" onclick="toggleDrawer('cartDrawer')"></div>
+  <div class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i data-lucide="shopping-bag"></i> Shopping Bag</h3>
+      <button class="close-btn" onclick="toggleDrawer('cartDrawer')">&times;</button>
+    </div>
+    <div class="drawer-content" id="cartContent">
+      <!-- Cart items injected dynamically -->
+    </div>
+    <div class="drawer-footer">
+      <div class="price-summary">
+        <div class="price-row">
+          <span>Bag Total</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <div class="price-row">
+          <span>Shipping Fee</span>
+          <span class="text-success">FREE</span>
+        </div>
+        <div class="price-row total">
+          <span>Total Amount</span>
+          <span id="cartTotal">₹0</span>
+        </div>
+      </div>
+      <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+  </div>
+
+  <!-- WISHLIST SIDE DRAWER -->
+  <div class="drawer-backdrop" id="wishlistBackdrop" onclick="toggleDrawer('wishlistDrawer')"></div>
+  <div class="drawer" id="wishlistDrawer">
+    <div class="drawer-header">
+      <h3><i data-lucide="heart"></i> My Wishlist</h3>
+      <button class="close-btn" onclick="toggleDrawer('wishlistDrawer')">&times;</button>
+    </div>
+    <div class="drawer-content" id="wishlistContent">
+      <!-- Wishlist items injected dynamically -->
+    </div>
+    <div class="drawer-footer" style="background-color: var(--color-bg);">
+      <button class="checkout-btn" style="background: var(--color-text-primary);" onclick="toggleDrawer('wishlistDrawer')">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- QUICK VIEW DETAIL MODAL -->
+  <div class="modal-backdrop" id="quickViewBackdrop" onclick="handleModalBackdropClick(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeQuickView()">&times;</button>
+      <div class="modal-grid">
+        <div class="modal-gallery">
+          <img id="modalImg" src="" alt="Product Detail">
+        </div>
+        <div class="modal-info">
+          <span class="modal-brand" id="modalBrand">BRAND</span>
+          <h2 class="modal-name font-display" id="modalName">Product Name</h2>
+          
+          <div class="modal-rating-box">
+            <span class="product-rating" id="modalRating">4.5 <i data-lucide="star" class="fill-warning"></i></span>
+            <span class="product-reviews" id="modalReviews">500 Ratings</span>
+          </div>
+
+          <div class="modal-price-box">
+            <div class="prices">
+              <span class="curr" id="modalCurrPrice">₹0</span>
+              <span class="orig" id="modalOrigPrice">₹0</span>
+              <span class="disc" id="modalDiscount">0% OFF</span>
+            </div>
+          </div>
+
+          <div class="modal-sizes">
+            <h4>Select Size</h4>
+            <div class="size-selectors">
+              <button class="size-btn active">S</button>
+              <button class="size-btn">M</button>
+              <button class="size-btn">L</button>
+              <button class="size-btn">XL</button>
+            </div>
+          </div>
+
+          <div class="modal-desc-box">
+            <h4>Product Details</h4>
+            <p id="modalDesc">Description goes here...</p>
+          </div>
+
+          <button class="modal-action-btn" id="modalAddBagBtn">Add To Bag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT STATE & INTERACTIONS -->
+  <script>
+    // Mock Product Data with Real Curated Unsplash Photos
+    const products = [
+      {
+        id: 1,
+        name: 'Roadster Casual Shirt',
+        brand: 'Roadster',
+        category: 'men',
+        price: 1299,
+        originalPrice: 2499,
+        discount: 48,
+        rating: 4.2,
+        reviews: 1240,
+        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80',
+        description: 'Cotton solid casual shirt, has a spread collar, button placket, long sleeves, and a curved hem.',
+        sizes: ['S', 'M', 'L', 'XL']
+      },
+      {
+        id: 2,
+        name: 'Zara Floral Summer Dress',
+        brand: 'Zara',
+        category: 'women',
+        price: 2499,
+        originalPrice: 4999,
+        discount: 50,
+        rating: 4.5,
+        reviews: 890,
+        image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop&q=80',
+        description: 'V-neck dress with adjustable thin straps. Flared hem and floral print pattern.',
+        sizes: ['XS', 'S', 'M', 'L']
+      },
+      {
+        id: 3,
+        name: 'Nike Air Max Athletics',
+        brand: 'Nike',
+        category: 'shoes',
+        price: 5499,
+        originalPrice: 8999,
+        discount: 38,
+        rating: 4.7,
+        reviews: 2310,
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        description: 'Mesh panels for breathable comfort. Max Air unit provides lightweight cushioning with rubber outsoles.',
+        sizes: ['7', '8', '9', '10']
+      },
+      {
+        id: 4,
+        name: 'Fossil Leather Watch',
+        brand: 'Fossil',
+        category: 'watches',
+        price: 4299,
+        originalPrice: 8499,
+        discount: 49,
+        rating: 4.4,
+        reviews: 560,
+        image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=600&auto=format&fit=crop&q=80',
+        description: 'Brown leather strap watch with quartz movement and chronographs. Water resistant up to 50m.',
+        sizes: ['One Size']
+      },
+      {
+        id: 5,
+        name: 'H&M Knitwear Winter Sweater',
+        brand: 'H&M',
+        category: 'women',
+        price: 1499,
+        originalPrice: 2999,
+        discount: 50,
+        rating: 4.1,
+        reviews: 420,
+        image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80',
+        description: 'Soft knit sweater with drop shoulders, long sleeves, and ribbing around the neckline, cuffs, and hem.',
+        sizes: ['S', 'M', 'L', 'XL']
+      },
+      {
+        id: 6,
+        name: 'Lavie Designer Shoulder Bag',
+        brand: 'Lavie',
+        category: 'accessories',
+        price: 1899,
+        originalPrice: 3799,
+        discount: 50,
+        rating: 4.3,
+        reviews: 730,
+        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&auto=format&fit=crop&q=80',
+        description: 'Faux leather shoulder bag with spacious compartments and double handles. Includes metallic zip pullers.',
+        sizes: ['One Size']
+      },
+      {
+        id: 7,
+        name: 'Ray-Ban Gradient Sunglasses',
+        brand: 'Ray-Ban',
+        category: 'accessories',
+        price: 3499,
+        originalPrice: 5999,
+        discount: 41,
+        rating: 4.6,
+        reviews: 1100,
+        image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&auto=format&fit=crop&q=80',
+        description: 'Metal frame pilot aviators featuring 100% UV protection and gradient green classic lenses.',
+        sizes: ['One Size']
+      },
+      {
+        id: 8,
+        name: 'CeraVe Hydrating Cleanser',
+        brand: 'CeraVe',
+        category: 'beauty',
+        price: 899,
+        originalPrice: 1499,
+        discount: 40,
+        rating: 4.8,
+        reviews: 3500,
+        image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&auto=format&fit=crop&q=80',
+        description: 'Developed with dermatologists, CeraVe Hydrating Facial Cleanser cleanses and hydrates skin barrier.',
+        sizes: ['236ml', '473ml']
+      }
+    ];
+
+    // State Objects
+    let cart = [];
+    let wishlist = [];
+    let currentCategory = 'all';
+
+    // Carousel Slider Auto Logic
+    let currentSlide = 0;
+    const totalSlides = 3;
+    const heroSlider = document.getElementById('heroSlider');
+    const dots = document.querySelectorAll('#carouselDots .dot');
+
+    function setSlide(index) {
+      currentSlide = index;
+      heroSlider.style.transform = `translateX(-${index * 33.333}%)`;
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+    }
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      setSlide(currentSlide);
+    }, 4500);
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProducts(products);
+      // Initialize Lucide icons
+      lucide.createIcons();
+    });
+
+    // Render Product Cards
+    function renderProducts(productArray) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      if (productArray.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: span 4; text-align: center; padding: 40px 0; color: var(--color-text-muted);">
+            <p>No products found matching the criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      productArray.forEach(product => {
+        const isWish = wishlist.some(item => item.id === product.id);
+        const cardHtml = `
+          <div class="product-card">
+            <div class="discount-badge">${product.discount}% OFF</div>
+            <button class="wishlist-btn ${isWish ? 'active' : ''}" onclick="toggleWishlist(${product.id})" aria-label="Add to Wishlist">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${isWish ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </button>
+            <div class="product-img-box" onclick="openQuickView(${product.id})">
+              <img src="${product.image}" alt="${product.name}">
+              <div class="add-bag-overlay">
+                <button class="quick-add-btn" onclick="event.stopPropagation(); addToCart(${product.id})">Add to Bag</button>
+              </div>
+            </div>
+            <div class="product-info" onclick="openQuickView(${product.id})">
+              <span class="product-brand">${product.brand}</span>
+              <h3 class="product-name">${product.name}</h3>
+              <div class="product-meta">
+                <span class="product-rating">${product.rating} <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                <span class="product-reviews">(${product.reviews})</span>
+              </div>
+              <div class="product-price-box">
+                <span class="curr-price">₹${product.price}</span>
+                <span class="orig-price">₹${product.originalPrice}</span>
+                <span class="discount-percentage">(${product.discount}% OFF)</span>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHtml);
+      });
+    }
+
+    // Toggle Side Drawer Panels
+    function toggleDrawer(drawerId) {
+      const drawer = document.getElementById(drawerId);
+      const backdrop = document.getElementById(drawerId === 'cartDrawer' ? 'cartBackdrop' : 'wishlistBackdrop');
+      
+      drawer.classList.toggle('active');
+      backdrop.classList.toggle('active');
+      
+      if (drawer.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Dynamic Filter Categories
+    function filterCategory(category) {
+      currentCategory = category;
+      // Manage mobile nav active style
+      const catLinks = document.querySelectorAll('.categories-menu a');
+      catLinks.forEach(link => {
+        link.classList.toggle('active', link.innerText.toLowerCase() === category);
+      });
+
+      if (category === 'all') {
+        renderProducts(products);
+      } else {
+        const filtered = products.filter(p => p.category === category);
+        renderProducts(filtered);
+      }
+      // Scroll grid into focus if filter changed
+      document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Search input filters
+    function handleSearch(event) {
+      const query = event.target.value.toLowerCase().trim();
+      if (query === '') {
+        renderProducts(products);
+        return;
+      }
+      const filtered = products.filter(p => 
+        p.name.toLowerCase().includes(query) ||
+        p.brand.toLowerCase().includes(query) ||
+        p.category.toLowerCase().includes(query)
+      );
+      renderProducts(filtered);
+    }
+
+    // Cart Operations
+    function addToCart(productId, size = 'M') {
+      const product = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId && item.size === size);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1, size });
+      }
+
+      updateCartUI();
+      // Show micro animation feedback on badge
+      const badge = document.getElementById('cartBadge');
+      badge.style.transform = 'scale(1.2)';
+      setTimeout(() => badge.style.transform = 'scale(1)', 200);
+
+      // Open drawer automatically on add
+      toggleDrawer('cartDrawer');
+    }
+
+    function updateQty(productId, size, change) {
+      const item = cart.find(i => i.id === productId && i.size === size);
+      if (!item) return;
+
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => !(i.id === productId && i.size === size));
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId, size) {
+      cart = cart.filter(i => !(i.id === productId && i.size === size));
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const cartContent = document.getElementById('cartContent');
+      const badge = document.getElementById('cartBadge');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const totalEl = document.getElementById('cartTotal');
+
+      // Update badge
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      badge.textContent = totalCount;
+
+      if (cart.length === 0) {
+        cartContent.innerHTML = `
+          <div class="drawer-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <p>Your shopping bag is empty.</p>
+          </div>
+        `;
+        subtotalEl.textContent = '₹0';
+        totalEl.textContent = '₹0';
+        return;
+      }
+
+      cartContent.innerHTML = '';
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+        const itemHtml = `
+          <div class="drawer-item">
+            <div class="drawer-item-img">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="drawer-item-info">
+              <span class="drawer-item-brand">${item.brand}</span>
+              <h4 class="drawer-item-name">${item.name} (${item.size})</h4>
+              <div class="drawer-item-price-box">
+                <span class="drawer-item-price">₹${item.price}</span>
+                <span class="drawer-item-orig">₹${item.originalPrice}</span>
+              </div>
+              <div class="drawer-item-qty">
+                <button class="qty-btn" onclick="updateQty(${item.id}, '${item.size}', -1)">-</button>
+                <span class="qty-val">${item.quantity}</span>
+                <button class="qty-btn" onclick="updateQty(${item.id}, '${item.size}', 1)">+</button>
+              </div>
+            </div>
+            <button class="remove-item-btn" onclick="removeFromCart(${item.id}, '${item.size}')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </button>
+          </div>
+        `;
+        cartContent.insertAdjacentHTML('beforeend', itemHtml);
+      });
+
+      subtotalEl.textContent = `₹${subtotal}`;
+      totalEl.textContent = `₹${subtotal}`;
+    }
+
+    // Wishlist Operations
+    function toggleWishlist(productId) {
+      const product = products.find(p => p.id === productId);
+      const idx = wishlist.findIndex(item => item.id === productId);
+
+      if (idx !== -1) {
+        wishlist.splice(idx, 1);
+      } else {
+        wishlist.push(product);
+      }
+
+      updateWishlistUI();
+      renderProducts(currentCategory === 'all' ? products : products.filter(p => p.category === currentCategory));
+
+      // Feedback animation
+      const badge = document.getElementById('wishlistBadge');
+      badge.style.transform = 'scale(1.2)';
+      setTimeout(() => badge.style.transform = 'scale(1)', 200);
+    }
+
+    function updateWishlistUI() {
+      const wishContent = document.getElementById('wishlistContent');
+      const badge = document.getElementById('wishlistBadge');
+
+      badge.textContent = wishlist.length;
+
+      if (wishlist.length === 0) {
+        wishContent.innerHTML = `
+          <div class="drawer-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <p>Your wishlist is empty.</p>
+          </div>
+        `;
+        return;
+      }
+
+      wishContent.innerHTML = '';
+      wishlist.forEach(item => {
+        const itemHtml = `
+          <div class="drawer-item">
+            <div class="drawer-item-img">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="drawer-item-info">
+              <span class="drawer-item-brand">${item.brand}</span>
+              <h4 class="drawer-item-name">${item.name}</h4>
+              <span class="drawer-item-price" style="margin-bottom: 8px;">₹${item.price}</span>
+              <button class="quick-add-btn" style="padding: 6px; font-size: 11px;" onclick="moveToCart(${item.id})">Move to Bag</button>
+            </div>
+            <button class="remove-item-btn" onclick="toggleWishlist(${item.id})">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </button>
+          </div>
+        `;
+        wishContent.insertAdjacentHTML('beforeend', itemHtml);
+      });
+    }
+
+    function moveToCart(productId) {
+      addToCart(productId);
+      toggleWishlist(productId); // Remove from wishlist on move
+    }
+
+    // Coupon Code copied feedback
+    function copyCoupon() {
+      const code = 'STYLE200';
+      navigator.clipboard.writeText(code);
+      alert('Coupon code "STYLE200" copied to clipboard! Applied flat ₹200 off.');
+    }
+
+    // Place Order simulated
+    function placeOrder() {
+      if (cart.length === 0) return;
+      alert('Order placed successfully! Thank you for shopping with StyleBazaar.');
+      cart = [];
+      updateCartUI();
+      toggleDrawer('cartDrawer');
+    }
+
+    // Modal Quick View Detail View
+    let selectedSize = 'S';
+    let currentOpenProductId = null;
+
+    function openQuickView(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      currentOpenProductId = productId;
+      
+      document.getElementById('modalImg').src = product.image;
+      document.getElementById('modalBrand').textContent = product.brand;
+      document.getElementById('modalName').textContent = product.name;
+      document.getElementById('modalRating').innerHTML = `${product.rating} <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" class="fill-warning"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+      document.getElementById('modalReviews').textContent = `${product.reviews} Ratings`;
+      document.getElementById('modalCurrPrice').textContent = `₹${product.price}`;
+      document.getElementById('modalOrigPrice').textContent = `₹${product.originalPrice}`;
+      document.getElementById('modalDiscount').textContent = `${product.discount}% OFF`;
+      document.getElementById('modalDesc').textContent = product.description;
+
+      // Reset sizes selector
+      const sizeContainer = document.querySelector('.size-selectors');
+      sizeContainer.innerHTML = '';
+      product.sizes.forEach((sz, index) => {
+        const activeClass = index === 0 ? 'active' : '';
+        if (index === 0) selectedSize = sz;
+        
+        const btn = document.createElement('button');
+        btn.className = `size-btn ${activeClass}`;
+        btn.textContent = sz;
+        btn.onclick = () => selectSize(btn, sz);
+        sizeContainer.appendChild(btn);
+      });
+
+      // Update action button trigger
+      const addBagBtn = document.getElementById('modalAddBagBtn');
+      addBagBtn.onclick = () => {
+        addToCart(productId, selectedSize);
+        closeQuickView();
+      };
+
+      const modalBackdrop = document.getElementById('quickViewBackdrop');
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function selectSize(btnElement, sz) {
+      selectedSize = sz;
+      const buttons = document.querySelectorAll('.size-selectors .size-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+    }
+
+    function closeQuickView() {
+      const modalBackdrop = document.getElementById('quickViewBackdrop');
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleModalBackdropClick(event) {
+      if (event.target === document.getElementById('quickViewBackdrop')) {
+        closeQuickView();
+      }
+    }
+  </script>
+</body>
+</html>
