@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
 import { SearchProvider } from './context/SearchContext'
@@ -9,7 +9,7 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <CartProvider>
         <WishlistProvider>
           <SearchProvider>
@@ -17,6 +17,6 @@ createRoot(document.getElementById('root')).render(
           </SearchProvider>
         </WishlistProvider>
       </CartProvider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 )
